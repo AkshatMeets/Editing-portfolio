@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: #1C1C1A;
+    --color-text: #F5F1EA;
+    --color-muted: #8F887E;
+    --color-card: #242420;
+    --color-accent: #A58B68;
+    --color-cream: #EDE7DD;
+    --color-light: #FAF9F6;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    background-color: #1C1C1A;
+    color: #F5F1EA;
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: #1C1C1A;
+    color: #F5F1EA;
+    font-family: 'Kanit', sans-serif;
+    overflow-x: clip;
+  }
+}
+
+@layer utilities {
+  .hero-heading {
+    background: linear-gradient(180deg, #8F887E 0%, #F5F1EA 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 30px rgba(165, 139, 104, 0.2);
+  }
+}
+
+/* Smooth custom scrollbar matching warm luxury aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1C1C1A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3A3A36;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4A4A44;
+}

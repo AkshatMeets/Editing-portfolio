@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1412"/>
+      <stop offset="50%" stop-color="#1A1412"/>
+      <stop offset="100%" stop-color="#261B16"/>
+    </linearGradient>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="40%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.8"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#A8A29E" stroke-width="0.5" stroke-opacity="0.12"/>
+    </pattern>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <rect width="1200" height="750" fill="url(#grid)"/>
+
+  <!-- High Fashion Abstract Garment Geometry -->
+  <g opacity="0.4" stroke="#A8A29E" stroke-width="1.5" fill="none">
+    <ellipse cx="600" cy="337.5" rx="384" ry="210.00000000000003" stroke-dasharray="8 6"/>
+    <path d="M 240 150 Q 600 300 960 150" stroke-width="2"/>
+    <path d="M 240 525 Q 600 375 960 525" stroke-width="2"/>
+    <line x1="600" y1="112.5" x2="600" y2="562.5" stroke-width="1" stroke-dasharray="4 4"/>
+  </g>
+
+  <!-- Vignette -->
+  <rect width="1200" height="750" fill="url(#vignette)"/>
+
+  <!-- Editorial Framing -->
+  <rect x="30" y="30" width="1140" height="690" fill="none" stroke="#A8A29E" stroke-width="1" stroke-opacity="0.3"/>
+  <rect x="40" y="40" width="1120" height="670" fill="none" stroke="#A8A29E" stroke-width="0.5" stroke-opacity="0.15"/>
+
+  <!-- Technical Corner Metadata -->
+  <text x="50" y="70" fill="#A8A29E" font-family="sans-serif" font-size="12" font-weight="600" letter-spacing="3">ZENITSU STUDIO // AI FASHION LAB</text>
+  <text x="1150" y="70" fill="#A8A29E" font-family="sans-serif" font-size="12" font-weight="600" letter-spacing="3" text-anchor="end">AUTUMN/WINTER 2026</text>
+
+  <!-- Center Editorial Typography -->
+  <g transform="translate(600, 375)">
+    <rect x="-160" y="-120" width="320" height="28" rx="14" fill="#000000" fill-opacity="0.7" stroke="#A8A29E" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="0" y="-102" fill="#E7E5E4" font-family="sans-serif" font-size="11" font-weight="700" letter-spacing="4" text-anchor="middle">STAGE 02 • UNCORRECTED</text>
+    
+    <text x="0" y="-20" fill="#E7E5E4" font-family="sans-serif" font-size="44" font-weight="900" letter-spacing="2" text-anchor="middle">RAW AI OUTPUT</text>
+    
+    <text x="0" y="30" fill="#A8A29E" font-family="sans-serif" font-size="14" font-weight="500" letter-spacing="3" text-anchor="middle">INITIAL DIFFUSION ARTIFACTS &amp; SEAM WARP</text>
+    
+    <line x1="-120" y1="65" x2="120" y2="65" stroke="#A8A29E" stroke-width="1" stroke-opacity="0.4"/>
+  </g>
+
+  <!-- Bottom Technical Strip -->
+  <g transform="translate(50, 690)">
+    <text x="0" y="0" fill="#A8A29E" font-family="monospace" font-size="11" opacity="0.8">REF: PHYSICAL GARMENT FLAT // LATENT SAMPLER: DPM++ 2M</text>
+    <text x="1100" y="0" fill="#A8A29E" font-family="monospace" font-size="11" text-anchor="end" opacity="0.8">FIDELITY: 99.8% // MASTER 4K</text>
+  </g>
+</svg>

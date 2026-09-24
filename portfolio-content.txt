@@ -1,0 +1,151 @@
+============================================================
+ZENITSU — AI FASHION CREATIVE PORTFOLIO CONTENT
+============================================================
+
+BRAND IDENTITY:
+Name: ZENITSU
+Role: AI FASHION CREATIVE
+Experience: 5 months of hands-on experience creating AI-generated fashion images, AI fashion videos, product visuals, creative compositions, image editing and post-production for clothing/apparel brands.
+Primary Positioning: AI-generated fashion imagery and video for modern apparel brands.
+Main Message: I combine AI generation, reference control, creative direction and precision editing to create commercial-ready fashion content.
+Contact Email: hello@zenitsu.studio
+Page Title: Zenitsu — AI Fashion Creative
+
+COLOR SYSTEM:
+Background: #0C0C0C
+Primary Light Text: #D7E2EA
+Card Background: #141414 / #16181A
+Border / Divider: rgba(215, 226, 234, 0.1)
+Gradient Heading: linear-gradient(180deg, #646973 0%, #BBCCD7 100%)
+
+PROJECTS:
+------------------------------------------------------------
+Project 01:
+ID: ethereal-threads
+Number: 01
+Title: ETHEREAL THREADS
+Category: AI Fashion Campaign
+Role: Creative Direction & AI Generation
+Deliverables: 12-Look Digital Lookbook, 48 4K Campaign Stills, 3 Motion Loops
+Objective: Produce a 12-look seasonal editorial campaign without executing an expensive on-location photoshoot.
+Challenge: Maintaining structural weave integrity, distinctive metal hardware, and consistent model aesthetic across complex architectural lighting setups.
+Reference: Physical garment photos, technical flats, fabric swatches.
+AI Generation: Controlled latent generation placing garments on digital models in brutalist architectural spaces.
+Corrections: Seam realignments, fabric drape tension adjustments around joints, and reconstructed brand insignia.
+Final Output: 48 high-resolution commercial campaign images ready for billboards and digital flagships.
+Images:
+  Left Stack 1: /images/project-1-1.jpg
+  Left Stack 2: /images/project-1-2.jpg
+  Right Tall:   /images/project-1-hero.jpg
+
+------------------------------------------------------------
+Project 02:
+ID: midnight-atelier
+Number: 02
+Title: MIDNIGHT ATELIER
+Category: Fashion Editorial
+Role: Concept Direction & Fabric Retouching
+Deliverables: 24 Editorial Campaign Stills, 6 Full-Bleed Web Banners, 2 Motion Teasers
+Objective: Generate dramatic nocturnal campaign visuals showcasing high-shine silk, structured tulle, and hand-stitched beadwork.
+Challenge: Preventing AI fabric rendering blur, preserving translucency in delicate tulle layers, and balancing low-key ambient contrast.
+Reference: Mannequin fitting photos, micro textile close-ups, and Parisian architecture moodboards.
+AI Generation: High-contrast volumetric fashion compositions with dynamic model poses.
+Corrections: Hand-sculpted specular highlights on silk folds, eliminated geometric artifacts, and aligned embroidery contours.
+Final Output: High-luxury couture campaign deployed across digital flagships and luxury digital storefronts.
+Images:
+  Left Stack 1: /images/project-2-1.jpg
+  Left Stack 2: /images/project-2-2.jpg
+  Right Tall:   /images/project-2-hero.jpg
+
+------------------------------------------------------------
+Project 03:
+ID: urban-nomad
+Number: 03
+Title: URBAN NOMAD
+Category: AI Product Photography
+Role: Product Synthesis & E-commerce Lighting
+Deliverables: 120+ Multi-Angle Product Shots, 8 Lifestyle Visuals, 1 Brand Motion Reel
+Objective: Transform basic warehouse garment flats into immersive lifestyle e-commerce imagery set in extreme alpine and metropolis rain environments.
+Challenge: Rendering authentic waterproof membrane sheen, taped seam details, and coherent water droplet physics across 30+ SKUs.
+Reference: Flat-lay product photography on neutral gray backdrops with precise color hex standards.
+AI Generation: Atmospheric environmental generations placing garments on talent in rugged weather conditions.
+Corrections: Re-composited original brand hardware, standardized zipper pull directions, and matched product color accuracy.
+Final Output: Cohesive e-commerce catalog with 120+ SKU product angles boosting conversion.
+Images:
+  Left Stack 1: /images/project-3-1.jpg
+  Left Stack 2: /images/project-3-2.jpg
+  Right Tall:   /images/project-3-hero.jpg
+
+------------------------------------------------------------
+Project 04:
+ID: silk-and-shadow
+Number: 04
+Title: SILK & SHADOW
+Category: E-commerce Content
+Role: Garment Fit & Texture Realism
+Deliverables: 36 E-commerce Catalog Visuals, Ghost Mannequin Composites, Fabric Detail Macro Shots
+Objective: Elevate intimate apparel lookbooks with soft-box lighting and delicate silk drape realism.
+Challenge: Preserving sheer fabric gradient falloff without algorithmic blurring.
+Reference: Studio flat lays and textile micro-samples.
+AI Generation: Studio lookbook staging with precision tone matching.
+Corrections: Localized contrast grading, seam preservation, edge transparency refinement.
+Final Output: E-commerce asset package ready for web storefronts.
+Images:
+  Left Stack 1: /images/project-4-1.jpg
+  Left Stack 2: /images/project-4-2.jpg
+  Right Tall:   /images/project-4-hero.jpg
+
+------------------------------------------------------------
+Project 05:
+ID: concrete-runway
+Number: 05
+Title: CONCRETE RUNWAY
+Category: AI Fashion Video
+Role: Motion Direction & AI Video Generation
+Deliverables: 4K Runway Simulation, 3 Vertical Social Ad Cuts, Digital Billboard Sequences
+Objective: Create dynamic motion runway video clips capturing fabric physics and walking rhythm.
+Challenge: Eliminating temporal morphing and maintaining garment silhouette stability across motion frames.
+Reference: Real walking model reference video and physical garment swatches.
+AI Generation: Multi-frame coherent video diffusion pipeline.
+Corrections: Frame interpolation stabilization, color profile standardization, artifact removal.
+Final Output: Cinematic 4K motion loops deployed on digital outdoor and social ads.
+Images:
+  Left Stack 1: /images/project-5-1.jpg
+  Left Stack 2: /images/project-5-2.jpg
+  Right Tall:   /images/project-5-hero.jpg
+
+------------------------------------------------------------
+Project 06:
+ID: golden-hour
+Number: 06
+Title: GOLDEN HOUR
+Category: Lifestyle Fashion
+Role: Scene Generation & Color Grading
+Deliverables: 30 Resort Collection Visuals, 4 Social Campaign Carousels
+Objective: Produce warm Mediterranean summer resort imagery from studio sample garments.
+Challenge: Realistic sunlight skin interaction, linen wrinkle authenticity, and natural shadow casting.
+Reference: Studio garment packshots and sunlit location moodboards.
+AI Generation: Natural sunlight simulation with warm color temperature.
+Corrections: Linen fabric texture enhancement, shadow softening, localized exposure balancing.
+Final Output: Editorial resort wear campaign for spring/summer launch.
+Images:
+  Left Stack 1: /images/project-6-1.jpg
+  Left Stack 2: /images/project-6-2.jpg
+  Right Tall:   /images/project-6-hero.jpg
+
+SERVICES:
+------------------------------------------------------------
+01 AI FASHION PHOTOGRAPHY
+Create premium fashion imagery using clothing references, AI-generated models, controlled compositions and editorial art direction.
+
+02 AI PRODUCT IMAGERY
+Create studio, tabletop, folded and e-commerce product visuals for apparel.
+
+03 AI FASHION VIDEO
+Create short-form fashion reels, product motion and cinematic campaign visuals.
+
+04 IMAGE EDITING & RETOUCHING
+Refine AI outputs through color correction, compositing, garment corrections, background refinement and final retouching.
+
+05 AI CREATIVE COORDINATION
+Coordinate references, prompts, generation iterations, visual consistency and final post-production.

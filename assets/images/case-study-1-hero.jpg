@@ -1,0 +1,5 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect fill="#1a1a1a" width="1600" height="900"/>
+  <text fill="#666" font-family="Inter,sans-serif" font-size="24" font-weight="300" text-anchor="middle" x="800" y="440">CASE STUDY 1 HERO</text>
+  <text fill="#444" font-family="Inter,sans-serif" font-size="16" text-anchor="middle" x="800" y="480">1600 × 900</text>
+</svg>

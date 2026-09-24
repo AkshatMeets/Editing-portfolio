@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Zenitsu</title>
+    <meta name="description" content="Have a project in mind? Let's discuss how AI-generated fashion content can work for your brand.">
+    <meta property="og:title" content="Contact — Zenitsu">
+    <meta property="og:description" content="Have a project in mind? Let's discuss how AI-generated fashion content can work for your brand.">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <nav class="nav" id="nav">
+        <a href="index.html" class="logo">ZENITSU</a>
+        <div class="nav-links">
+            <a href="work.html">Work</a>
+            <a href="case-studies.html">Case Studies</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+            <a href="contact.html" class="active" aria-current="page">Contact</a>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+        </button>
+        <div class="mobile-menu">
+            <a href="work.html">Work</a>
+            <a href="case-studies.html">Case Studies</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+            <a href="contact.html" class="active" aria-current="page">Contact</a>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <!-- Contact Section -->
+        <section class="contact-section section pt-8 pb-5">
+            <div class="container">
+                
+                <header class="contact-hero mb-5 reveal">
+                    <h1 class="font-cormorant hero-title">Get in Touch</h1>
+                    <p class="hero-subtitle text-gray">Have a project in mind? Let's discuss how AI-generated fashion content can work for your brand.</p>
+                </header>
+
+                <div class="contact-grid">
+                    
+                    <!-- Contact Form (Left) -->
+                    <div class="contact-form-col reveal">
+                        <!-- Note: This form is frontend only. Connect to a backend or service like Formspree for production. -->
+                        <form action="#" method="POST" class="contact-form" id="contactForm" onsubmit="event.preventDefault(); alert('Thanks for your message! (Frontend-only demo)');">
+                            
+                            <div class="form-group mb-3">
+                                <label for="name" class="font-inter text-sm mb-1 d-block">Name</label>
+                                <input type="text" id="name" name="name" class="form-control" required placeholder="Your name">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="email" class="font-inter text-sm mb-1 d-block">Email</label>
+                                <input type="email" id="email" name="email" class="form-control" required placeholder="your.email@example.com">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="brand" class="font-inter text-sm mb-1 d-block">Brand / Company</label>
+                                <input type="text" id="brand" name="brand" class="form-control" placeholder="Your brand name">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="projectType" class="font-inter text-sm mb-1 d-block">Project Type</label>
+                                <div class="custom-select-wrapper">
+                                    <select id="projectType" name="projectType" class="form-control form-select" required>
+                                        <option value="" disabled selected>Select a project type</option>
+                                        <option value="AI Fashion Photography">AI Fashion Photography</option>
+                                        <option value="AI Product Imagery">AI Product Imagery</option>
+                                        <option value="AI Fashion Video">AI Fashion Video</option>
+                                        <option value="Image Editing & Retouching">Image Editing & Retouching</option>
+                                        <option value="AI Creative Coordination">AI Creative Coordination</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="message" class="font-inter text-sm mb-1 d-block">Message</label>
+                                <textarea id="message" name="message" class="form-control" rows="5" required placeholder="Tell me about your project..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info (Right) -->
+                    <div class="contact-info-col reveal delay-1">
+                        <div class="contact-info-card bg-light p-4">
+                            
+                            <div class="info-block mb-3 border-bottom pb-3">
+                                <h3 class="font-cormorant text-md mb-1">Email</h3>
+                                <a href="mailto:hello@zenitsu.studio" class="text-link text-gray">hello@zenitsu.studio</a>
+                            </div>
+
+                            <div class="info-block mb-3 border-bottom pb-3">
+                                <h3 class="font-cormorant text-md mb-1">Based In</h3>
+                                <p class="text-gray text-sm">India</p>
+                            </div>
+
+                            <div class="info-block mb-3 border-bottom pb-3">
+                                <h3 class="font-cormorant text-md mb-1">Availability</h3>
+                                <p class="text-gray text-sm">Available for new projects</p>
+                            </div>
+
+                            <div class="info-block mb-3 border-bottom pb-3">
+                                <h3 class="font-cormorant text-md mb-1">Response Time</h3>
+                                <p class="text-gray text-sm">I typically respond within 24 hours.</p>
+                            </div>
+
+                            <div class="info-block">
+                                <h3 class="font-cormorant text-md mb-2">Social</h3>
+                                <div class="social-links d-flex gap-3">
+                                    <a href="#" class="text-link text-gray text-sm">Instagram</a>
+                                    <a href="#" class="text-link text-gray text-sm">Behance</a>
+                                    <a href="#" class="text-link text-gray text-sm">LinkedIn</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">ZENITSU</a>
+                    <a href="mailto:hello@zenitsu.studio" class="footer-email">hello@zenitsu.studio</a>
+                </div>
+                <div class="footer-links">
+                    <a href="work.html">Work</a>
+                    <a href="case-studies.html">Case Studies</a>
+                    <a href="services.html">Services</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" aria-label="Instagram">Instagram</a>
+                    <a href="#" aria-label="Behance">Behance</a>
+                    <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Zenitsu. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

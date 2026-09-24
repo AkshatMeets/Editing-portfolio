@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="p71bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181816"/>
+      <stop offset="100%" stop-color="#24231F"/>
+    </linearGradient>
+    <pattern id="p71grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#8F887E" stroke-width="0.5" stroke-opacity="0.15"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#p71bg)"/>
+  <rect width="800" height="600" fill="url(#p71grid)"/>
+  <rect x="24" y="24" width="752" height="552" fill="none" stroke="#8F887E" stroke-width="1" stroke-opacity="0.25"/>
+  <g transform="translate(400, 300)">
+    <text x="0" y="-30" fill="#EDE7DD" font-family="'Inter', sans-serif" font-size="12" font-weight="700" letter-spacing="4" text-anchor="middle">TYPOGRAPHY &amp; GRID REFERENCES</text>
+    <text x="0" y="10" fill="#F5F1EA" font-family="'Inter', sans-serif" font-size="28" font-weight="900" letter-spacing="2" text-anchor="middle">CONCEPT BOARDS</text>
+    <text x="0" y="45" fill="#8F887E" font-family="'Inter', sans-serif" font-size="11" font-weight="500" letter-spacing="2" text-anchor="middle">EDITORIAL LAYOUTS // FINANCIAL CURRENCY // KINETIC TYPE</text>
+  </g>
+</svg>
