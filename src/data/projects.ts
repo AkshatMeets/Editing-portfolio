@@ -35,9 +35,9 @@ export const projectsData: ProjectData[] = [
     beforeAfterComparison: 'Enable a before/after comparison showing the original garment/reference material against the final AI-generated campaign result.',
     ctaText: 'DISCUSS A SIMILAR PROJECT',
     images: {
-      stack1: '/images/project-1-1.svg',
-      stack2: '/images/project-1-2.svg',
-      tall: '/images/project-1-hero.svg',
+      stack1: '/images/project1_reference.webp',
+      stack2: '/images/project1_process.webp',
+      tall: '/images/project1_final.png',
     },
   },
 
@@ -75,9 +75,9 @@ export const projectsData: ProjectData[] = [
     beforeAfterComparison: 'Enable a comparison between the original denim/sewing reference and the final fashion campaign output.',
     ctaText: 'DISCUSS A SIMILAR PROJECT',
     images: {
-      stack1: '/images/project-2-1.svg',
-      stack2: '/images/project-2-2.svg',
-      tall: '/images/project-2-hero.svg',
+      stack1: '/images/project2_reference.webp',
+      stack2: '/images/project2_process.png',
+      tall: '/images/project2_final.png',
     },
   },
 
@@ -116,9 +116,9 @@ export const projectsData: ProjectData[] = [
     beforeAfterComparison: 'Show the original garment/model reference against the final large-scale AI campaign composition.',
     ctaText: 'DISCUSS A SIMILAR PROJECT',
     images: {
-      stack1: '/images/project-3-1.svg',
-      stack2: '/images/project-3-2.svg',
-      tall: '/images/project-3-hero.svg',
+      stack1: '/images/project3_reference.webp',
+      stack2: '/images/project3_process.png',
+      tall: '/images/project3_final.png',
     },
   },
 
@@ -156,9 +156,9 @@ export const projectsData: ProjectData[] = [
     beforeAfterComparison: 'Show the original garment/model reference beside the final AI-generated yacht campaign.',
     ctaText: 'DISCUSS A SIMILAR PROJECT',
     images: {
-      stack1: '/images/project-4-1.svg',
-      stack2: '/images/project-4-2.svg',
-      tall: '/images/project-4-hero.svg',
+      stack1: '/images/project4_reference.jpeg',
+      stack2: '/images/project4_process.png',
+      tall: '/images/project4_final.png',
     },
   },
 
@@ -196,9 +196,9 @@ export const projectsData: ProjectData[] = [
     beforeAfterComparison: 'Show the original shirt/product reference against the final AI-generated product video frame.',
     ctaText: 'DISCUSS A SIMILAR PROJECT',
     images: {
-      stack1: '/images/project-5-1.svg',
-      stack2: '/images/project-5-2.svg',
-      tall: '/images/project-5-hero.svg',
+      stack1: '/images/project5_reference.jpeg',
+      stack2: '/images/project5_process.png',
+      tall: '/images/project5_final.png',
     },
   },
 
@@ -236,9 +236,9 @@ export const projectsData: ProjectData[] = [
     beforeAfterComparison: 'Show the original outfit reference and the final transformed fashion sequence.',
     ctaText: 'DISCUSS A SIMILAR PROJECT',
     images: {
-      stack1: '/images/project-6-1.svg',
-      stack2: '/images/project-6-2.svg',
-      tall: '/images/project-6-hero.svg',
+      stack1: '/images/project6_reference.png',
+      stack2: '/images/project6_process.png',
+      tall: '/images/project6_final.png',
     },
   },
 
