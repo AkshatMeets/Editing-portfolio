@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from 'react';
-import { motion, MotionValue, useTransform } from 'framer-motion';
-import { ArrowUpRight, Play, Pause } from 'lucide-react';
+import React, { useRef, useEffect, useCallback } from 'react';
+import { motion } from 'framer-motion';
+import { Volume2, VolumeX, ArrowUpRight } from 'lucide-react';
 
 export interface ProjectData {
   id: string;
@@ -36,278 +36,153 @@ export interface ProjectData {
     stack2: string;
     tall: string;
   };
+  // New fields for simplified display
+  simpleCategory?: string;
+  simpleDescription?: string;
 }
 
 interface ProjectCardProps {
   project: ProjectData;
   index: number;
   total: number;
-  scrollYProgress: MotionValue<number>;
   onSelect: (project: ProjectData) => void;
 }
+
+// Category mapping for simple display
+const getCategoryLabel = (project: ProjectData): string => {
+  if (project.simpleCategory) return project.simpleCategory;
+  const cat = project.category.toLowerCase();
+  if (cat.includes('motion graphics')) return 'Motion Graphics';
+  if (cat.includes('storytelling')) return 'AI Video';
+  if (cat.includes('transformation')) return 'AI Video';
+  if (cat.includes('product')) return 'Product Video';
+  if (cat.includes('fashion') && cat.includes('film')) return 'Fashion Video';
+  if (cat.includes('yacht')) return 'Fashion Video';
+  if (cat.includes('fashion')) return 'AI Video';
+  if (cat.includes('model')) return 'AI Video';
+  return 'Video Editing';
+};
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   index,
-  total,
-  scrollYProgress,
   onSelect,
 }) => {
-  // Compute scale-down stacking effect based on scroll progress
-  const start = index / total;
-  const scale = useTransform(scrollYProgress, [start, 1], [1, 1 - (total - index - 1) * 0.035]);
-
-  const isVerticalVideo = project.video && project.aspectRatio === '9/16';
-  const isHorizontalVideo = project.video && project.aspectRatio === '16/9';
+  const isHorizontalVideo = project.aspectRatio === '16/9';
 
   return (
-    <div className="sticky top-20 sm:top-24 mb-12 sm:mb-16">
+    <div className="project-card-snap">
       <motion.article
-        style={{ scale }}
-        className="w-full bg-[#242420] border border-[#8F887E]/15 rounded-[32px] sm:rounded-[40px] p-6 sm:p-8 lg:p-10 shadow-2xl overflow-hidden transition-colors hover:border-[#8F887E]/30"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full bg-[#242420] border border-[#8F887E]/15 rounded-2xl sm:rounded-3xl overflow-hidden transition-colors hover:border-[#8F887E]/30 shadow-2xl"
       >
-        {/* Project Meta Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 sm:pb-8 border-b border-[#8F887E]/15 mb-6 sm:mb-8">
-          <div>
-            <div className="flex items-center gap-3 text-xs font-inter uppercase tracking-[0.2em] text-[#8F887E] mb-2">
-              <span className="font-semibold text-[#F5F1EA]">{project.number}</span>
-              <span className="text-[#8F887E]/40">/</span>
-              <span>{project.category}</span>
-              <span className="text-[#8F887E]/40">·</span>
-              <span className="text-[#EDE7DD]">{project.year}</span>
-              {project.videoRatio && (
-                <>
-                  <span className="text-[#8F887E]/40">·</span>
-                  <span className="text-[#A58B68]">{project.videoRatio}</span>
-                </>
-              )}
+        {/* Video Section - The Hero Element */}
+        <div
+          className="relative cursor-pointer group"
+          onClick={() => onSelect(project)}
+          role="button"
+          tabIndex={0}
+          aria-label={`Play ${project.title} video`}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect(project); } }}
+        >
+          <ProjectVideo
+            src={project.video}
+            poster={project.poster || project.images.tall}
+            alt={`${project.title} — project video`}
+            aspectRatio={project.aspectRatio}
+            isHorizontal={isHorizontalVideo}
+          />
+
+          {/* Play overlay hint on hover */}
+          <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#F5F1EA]/15 backdrop-blur-sm flex items-center justify-center border border-[#F5F1EA]/20">
+              <svg className="w-6 h-6 sm:w-7 sm:h-7 text-[#F5F1EA] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
             </div>
-            <h3 className="font-kanit font-black text-2xl sm:text-4xl text-[#F5F1EA] uppercase tracking-tight">
-              {project.title}
-            </h3>
-            <p className="text-xs sm:text-sm font-inter text-[#8F887E] mt-1">
-              Role: <span className="text-[#F5F1EA] font-medium">{project.role}</span>
-            </p>
           </div>
 
-          <button
-            onClick={() => onSelect(project)}
-            className="self-start sm:self-center inline-flex items-center gap-2 px-5 py-2.5 rounded-sm text-xs font-inter font-medium uppercase tracking-[0.2em] bg-[#F5F1EA]/10 hover:bg-[#F5F1EA] hover:text-[#1C1C1A] text-[#F5F1EA] border border-[#8F887E]/20 transition-all duration-300 group cursor-pointer"
-          >
-            <span>VIEW PROJECT</span>
-            <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </button>
+          {/* Project number badge */}
+          <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 bg-[#1C1C1A]/70 backdrop-blur-md px-2.5 py-1 rounded-sm text-[10px] sm:text-[11px] font-inter font-semibold uppercase tracking-widest text-[#F5F1EA] border border-[#8F887E]/15">
+            PROJECT {project.number}
+          </div>
+
+          {/* Category badge */}
+          <div className="absolute top-3 right-14 sm:top-4 sm:right-16 z-20 bg-[#A58B68]/20 backdrop-blur-md px-2.5 py-1 rounded-sm text-[10px] sm:text-[11px] font-inter font-medium uppercase tracking-wider text-[#A58B68] border border-[#A58B68]/20">
+            {getCategoryLabel(project)}
+          </div>
         </div>
 
-        {/* ── MEDIA SECTION ─────────────────────────────────────────────── */}
-
-        {isHorizontalVideo ? (
-          /* ── 16:9 HORIZONTAL VIDEO LAYOUT ────────────────────────────── */
-          /* Reference images side-by-side on top, full-width cinematic video below */
-          <div className="space-y-4 sm:space-y-6">
-            {/* Two reference images side-by-side */}
-            <div className="grid grid-cols-2 gap-4 sm:gap-6">
-              <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-[#242420] border border-[#8F887E]/15 group">
-                <img
-                  src={project.images.stack1}
-                  alt={`${project.title} — reference detail`}
-                  loading="eager"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute top-3 left-3 bg-[#1C1C1A]/70 backdrop-blur-md px-2.5 py-0.5 rounded-sm text-[9px] font-inter uppercase tracking-wider text-[#EDE7DD] border border-[#8F887E]/15">
-                  REFERENCE
-                </div>
-              </div>
-              <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-[#242420] border border-[#8F887E]/15 group">
-                <img
-                  src={project.images.stack2}
-                  alt={`${project.title} — process`}
-                  loading="eager"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute top-3 left-3 bg-[#1C1C1A]/70 backdrop-blur-md px-2.5 py-0.5 rounded-sm text-[9px] font-inter uppercase tracking-wider text-[#EDE7DD] border border-[#8F887E]/15">
-                  PROCESS
-                </div>
-              </div>
+        {/* Project Info Bar */}
+        <div className="px-5 py-4 sm:px-6 sm:py-5 lg:px-8 lg:py-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+            <div className="flex-1 min-w-0">
+              <h3 className="font-kanit font-black text-xl sm:text-2xl lg:text-3xl text-[#F5F1EA] uppercase tracking-tight leading-tight">
+                {project.title}
+              </h3>
+              <p className="text-xs sm:text-sm font-inter text-[#8F887E] mt-1.5 line-clamp-2">
+                {project.simpleDescription || project.role}
+              </p>
             </div>
 
-            {/* Full-width 16:9 cinematic video */}
-            <div className="relative rounded-lg overflow-hidden bg-[#1C1C1A] border border-[#8F887E]/15">
-              <ProjectVideo
-                src={project.video!}
-                poster={project.poster || project.images.tall}
-                alt={`${project.title} — campaign video`}
-                aspectRatio="16/9"
-              />
-              <div className="absolute top-4 left-4 z-10 bg-[#1C1C1A]/70 backdrop-blur-md px-3 py-1 rounded-sm text-[10px] font-inter font-medium uppercase tracking-widest text-[#F5F1EA] border border-[#8F887E]/15">
-                VIDEO
-              </div>
-              <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between text-[11px] font-inter uppercase tracking-wider text-[#F5F1EA] bg-[#1C1C1A]/60 backdrop-blur-md px-4 py-2 rounded-sm border border-[#8F887E]/15">
-                <span>DELIVERED</span>
-                <span className="text-[#8F887E]">COMMERCIAL READY</span>
-              </div>
+            <div className="flex items-center gap-3 flex-shrink-0">
+              {project.videoRatio && (
+                <span className="text-[10px] font-inter font-medium uppercase tracking-wider text-[#A58B68] bg-[#A58B68]/10 px-2 py-0.5 rounded-sm border border-[#A58B68]/15">
+                  {project.videoRatio}
+                </span>
+              )}
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-inter uppercase tracking-[0.15em] font-medium text-[#EDE7DD] hover:text-[#A58B68] transition-colors"
+              >
+                <span className="hidden sm:inline">DISCUSS PROJECT</span>
+                <span className="sm:hidden">DISCUSS</span>
+                <ArrowUpRight className="w-3 h-3 text-[#A58B68]" />
+              </a>
             </div>
           </div>
 
-        ) : isVerticalVideo ? (
-          /* ── 9:16 VERTICAL VIDEO LAYOUT ──────────────────────────────── */
-          /* Stacked images left, centered vertical video right */
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
-
-            {/* Left: Two Stacked Images (5 cols) */}
-            <div className="lg:col-span-5 grid grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-6">
-              <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-[#242420] border border-[#8F887E]/15 group">
-                <img
-                  src={project.images.stack1}
-                  alt={`${project.title} — reference detail`}
-                  loading="eager"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute top-3 left-3 bg-[#1C1C1A]/70 backdrop-blur-md px-2.5 py-0.5 rounded-sm text-[9px] font-inter uppercase tracking-wider text-[#EDE7DD] border border-[#8F887E]/15">
-                  REFERENCE
-                </div>
-              </div>
-              <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-[#242420] border border-[#8F887E]/15 group">
-                <img
-                  src={project.images.stack2}
-                  alt={`${project.title} — process`}
-                  loading="eager"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute top-3 left-3 bg-[#1C1C1A]/70 backdrop-blur-md px-2.5 py-0.5 rounded-sm text-[9px] font-inter uppercase tracking-wider text-[#EDE7DD] border border-[#8F887E]/15">
-                  PROCESS
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Centered 9:16 vertical video (7 cols) */}
-            <div className="lg:col-span-7 relative rounded-lg overflow-hidden bg-[#1C1C1A] border border-[#8F887E]/15 flex items-center justify-center min-h-[400px] sm:min-h-[460px] lg:min-h-[500px]">
-              <div className="h-full w-auto max-h-[400px] sm:max-h-[460px] lg:max-h-[500px]" style={{ aspectRatio: '9/16' }}>
-                <ProjectVideo
-                  src={project.video!}
-                  poster={project.poster || project.images.tall}
-                  alt={`${project.title} — fashion reel`}
-                  aspectRatio="9/16"
-                />
-              </div>
-              <div className="absolute top-4 left-4 z-10 bg-[#1C1C1A]/70 backdrop-blur-md px-3 py-1 rounded-sm text-[10px] font-inter font-medium uppercase tracking-widest text-[#F5F1EA] border border-[#8F887E]/15">
-                VIDEO
-              </div>
-              <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between text-[11px] font-inter uppercase tracking-wider text-[#F5F1EA] bg-[#1C1C1A]/60 backdrop-blur-md px-4 py-2 rounded-sm border border-[#8F887E]/15">
-                <span>DELIVERED</span>
-                <span className="text-[#8F887E]">COMMERCIAL READY</span>
-              </div>
-            </div>
-          </div>
-
-        ) : (
-          /* ── NO VIDEO: ORIGINAL 3-IMAGE LAYOUT ──────────────────────── */
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 h-auto lg:h-[460px]">
-
-            {/* Left: Two Stacked Images (5 cols) */}
-            <div className="lg:col-span-5 grid grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-6 h-full">
-              <div className="relative aspect-[4/3] lg:aspect-auto lg:h-[calc(50%-12px)] rounded-lg overflow-hidden bg-[#242420] border border-[#8F887E]/15 group">
-                <img
-                  src={project.images.stack1}
-                  alt={`${project.title} — reference detail`}
-                  loading="eager"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute top-3 left-3 bg-[#1C1C1A]/70 backdrop-blur-md px-2.5 py-0.5 rounded-sm text-[9px] font-inter uppercase tracking-wider text-[#EDE7DD] border border-[#8F887E]/15">
-                  REFERENCE
-                </div>
-              </div>
-              <div className="relative aspect-[4/3] lg:aspect-auto lg:h-[calc(50%-12px)] rounded-lg overflow-hidden bg-[#242420] border border-[#8F887E]/15 group">
-                <img
-                  src={project.images.stack2}
-                  alt={`${project.title} — process`}
-                  loading="eager"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute top-3 left-3 bg-[#1C1C1A]/70 backdrop-blur-md px-2.5 py-0.5 rounded-sm text-[9px] font-inter uppercase tracking-wider text-[#EDE7DD] border border-[#8F887E]/15">
-                  PROCESS
-                </div>
-              </div>
-            </div>
-
-            {/* Right: One Tall Image (7 cols) */}
-            <div className="lg:col-span-7 h-[320px] sm:h-[400px] lg:h-full relative rounded-lg overflow-hidden bg-[#242420] border border-[#8F887E]/15 group">
-              <img
-                src={project.images.tall}
-                alt={`${project.title} — final result`}
-                loading="eager"
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-              <div className="absolute top-4 left-4 bg-[#1C1C1A]/70 backdrop-blur-md px-3 py-1 rounded-sm text-[10px] font-inter font-medium uppercase tracking-widest text-[#F5F1EA] border border-[#8F887E]/15">
-                FINAL RESULT
-              </div>
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-[11px] font-inter uppercase tracking-wider text-[#F5F1EA] bg-[#1C1C1A]/60 backdrop-blur-md px-4 py-2 rounded-sm border border-[#8F887E]/15">
-                <span>DELIVERED</span>
-                <span className="text-[#8F887E]">COMMERCIAL READY</span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Project Card Footer: Deliverables & CTA */}
-        <div className="mt-6 pt-5 border-t border-[#8F887E]/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[10px] font-inter uppercase tracking-widest text-[#8F887E] mr-1">
-              DELIVERABLES:
-            </span>
+          {/* Deliverables tags */}
+          <div className="flex flex-wrap items-center gap-1.5 mt-3 pt-3 border-t border-[#8F887E]/10">
             {project.deliverables.slice(0, 3).map((item, i) => (
               <span
                 key={i}
-                className="text-[10px] font-inter px-2.5 py-0.5 rounded-sm bg-[#F5F1EA]/5 border border-[#8F887E]/15 text-[#EDE7DD]"
+                className="text-[9px] sm:text-[10px] font-inter px-2 py-0.5 rounded-sm bg-[#F5F1EA]/5 border border-[#8F887E]/10 text-[#EDE7DD]/80"
               >
                 {item}
               </span>
             ))}
             {project.deliverables.length > 3 && (
-              <span className="text-[10px] font-inter text-[#8F887E]">
+              <span className="text-[9px] sm:text-[10px] font-inter text-[#8F887E]">
                 +{project.deliverables.length - 3} more
               </span>
             )}
           </div>
-
-          <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-1.5 text-xs font-inter uppercase tracking-[0.2em] font-medium text-[#EDE7DD] hover:text-[#A58B68] transition-colors"
-            >
-              <span>DISCUSS A SIMILAR PROJECT</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-[#A58B68]" />
-            </a>
-
-            <button
-              onClick={() => onSelect(project)}
-              className="sm:hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-[10px] font-inter uppercase tracking-wider bg-[#F5F1EA]/10 text-[#F5F1EA]"
-            >
-              DETAILS
-            </button>
-          </div>
         </div>
-
       </motion.article>
     </div>
   );
 };
 
-// ─── Viewport-Aware Video Player ───────────────────────────────────────────
+// ─── Viewport-Aware Video Player with Volume Control ───────────────────────
 
 interface ProjectVideoProps {
   src: string;
   poster: string;
   alt: string;
   aspectRatio: string;
+  isHorizontal: boolean;
 }
 
-const ProjectVideo: React.FC<ProjectVideoProps> = ({ src, poster, alt, aspectRatio }) => {
+const ProjectVideo: React.FC<ProjectVideoProps> = ({ src, poster, alt, aspectRatio, isHorizontal }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isPlaying, setIsPlaying] = React.useState(false);
+  const [isMuted, setIsMuted] = React.useState(true);
 
-  // Intersection Observer: play when 40% visible, pause when not
+  // Intersection Observer: play when 50% visible, pause when not
   useEffect(() => {
     const video = videoRef.current;
     const container = containerRef.current;
@@ -316,32 +191,40 @@ const ProjectVideo: React.FC<ProjectVideoProps> = ({ src, poster, alt, aspectRat
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.play().then(() => setIsPlaying(true)).catch(() => {});
+          video.play().catch(() => {});
         } else {
           video.pause();
-          setIsPlaying(false);
+          // Mute when leaving viewport to avoid surprise audio
+          video.muted = true;
+          setIsMuted(true);
         }
       },
-      { threshold: 0.4 }
+      { threshold: 0.5 }
     );
 
     observer.observe(container);
     return () => observer.disconnect();
   }, []);
 
-  const togglePlay = () => {
+  const toggleMute = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent triggering the card click
+    e.preventDefault();
     const video = videoRef.current;
     if (!video) return;
-    if (video.paused) {
-      video.play().then(() => setIsPlaying(true)).catch(() => {});
-    } else {
-      video.pause();
-      setIsPlaying(false);
-    }
-  };
+    const newMuted = !video.muted;
+    video.muted = newMuted;
+    setIsMuted(newMuted);
+  }, []);
 
   return (
-    <div ref={containerRef} className="relative w-full h-full">
+    <div
+      ref={containerRef}
+      className={`relative w-full bg-[#1A1A18] ${
+        isHorizontal
+          ? 'aspect-video'
+          : 'aspect-[9/16] max-h-[70vh] sm:max-h-[75vh]'
+      } flex items-center justify-center overflow-hidden`}
+    >
       <video
         ref={videoRef}
         src={src}
@@ -351,16 +234,25 @@ const ProjectVideo: React.FC<ProjectVideoProps> = ({ src, poster, alt, aspectRat
         playsInline
         preload="metadata"
         aria-label={alt}
-        className="w-full h-full object-contain"
+        className={`${
+          isHorizontal
+            ? 'w-full h-full object-contain'
+            : 'h-full w-auto max-w-full object-contain'
+        }`}
         style={{ aspectRatio }}
       />
-      {/* Subtle play/pause toggle */}
+
+      {/* Volume / Mute button - positioned at top-right */}
       <button
-        onClick={togglePlay}
-        aria-label={isPlaying ? 'Pause video' : 'Play video'}
-        className="absolute bottom-4 right-4 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1C1C1A]/60 backdrop-blur-md border border-[#8F887E]/20 flex items-center justify-center text-[#F5F1EA] hover:bg-[#1C1C1A]/80 transition-colors cursor-pointer"
+        onClick={toggleMute}
+        aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+        className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1C1C1A]/70 backdrop-blur-md border border-[#8F887E]/25 flex items-center justify-center text-[#F5F1EA] hover:bg-[#1C1C1A]/90 hover:border-[#F5F1EA]/30 transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#A58B68]"
       >
-        {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" />}
+        {isMuted ? (
+          <VolumeX className="w-4 h-4" />
+        ) : (
+          <Volume2 className="w-4 h-4" />
+        )}
       </button>
     </div>
   );

@@ -40,6 +40,59 @@
   }
 }
 
+/* ─── Scroll-Snap for Project Cards ─────────────────────────────── */
+.projects-snap-container {
+  scroll-snap-type: y proximity;
+}
+
+.project-card-snap {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .project-card-snap {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+/* ─── Tools Marquee Animation ───────────────────────────────────── */
+.tools-marquee-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.tools-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 40s linear infinite;
+  will-change: transform;
+}
+
+.tools-marquee-wrapper:hover .tools-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% / 3));
+  }
+}
+
+/* ─── Line clamp utility ─────────────────────────────────────────── */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* Smooth custom scrollbar matching warm luxury aesthetic */
 ::-webkit-scrollbar {
   width: 6px;
